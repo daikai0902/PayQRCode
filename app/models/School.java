@@ -24,6 +24,12 @@ public class School extends BaseModel{
         return school.save();
     }
 
+    public void editSchool(String merchantId,String qrcode){
+        this.merchantId = merchantId;
+        this.qrcode = qrcode;
+        this.save();
+    }
+
    public static  List<School> fetchAll(){
         return find("select s from School s where s.isDeleted = 0 ").fetch();
    }
