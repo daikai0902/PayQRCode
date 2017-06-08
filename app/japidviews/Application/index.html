@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<body>
+    <input type="button" value="以微课账号登录" id="btn"/>
+</body>
+    <script type="text/javascript" src="@{'/public/back/js/jquery.min.js'}"></script>
+    <script type="text/javascript">
+    function connectWeikeJSBridge(callback) {
+            if (window.WeikeJSBridge) {
+                callback(WeikeJSBridge);
+            } else {
+                try {
+                        document.addEventListener('WeikeJSBridgeReady', function(){
+                        callback(WeikeJSBridge);
+                    });
+                } catch (e){
+
+                }
+            }
+        }
+        connectWeikeJSBridge(function(bridge) {
+            $("#btn").on("click",function(){
+                  alert(1);
+                  var d={"actionType":"wk_zjjf",
+                      "appId":"4028819A5C856C99015C8618549E25CA",
+                      "state":"123456AB"};
+                    bridge.send(d);
+             });
+        });
+    </script>
+
+</html>

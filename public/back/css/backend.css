@@ -50,3 +50,10 @@
 .classes-wrap ul li.selected{color: #5099CC;border:1px solid #5099CC;border-radius: 20px;}
 
 .btn-add-course{background:#3399E2 !important;}
+
+
+.qrcode{position:relative;-moz-transition:background-position .5s; -ms-transition:background-position .5s; -o-moz-transition:background-position .5s; -webkit-moz-transition:background-position .5s; transition:background-position .5s;}
+.qrcode .barcode-layer{width:420px; height:420px; position:absolute; left:-386px; top:-3px; background-color: #fff; border: 1px solid #c8c8c8; opacity:0; z-index: 5; filter:alpha(opacity=0); transform-origin: 100% 0%; -moz-transform-origin: 100% 0%; -ms-transform-origin: 100% 0%; -o-transform-origin: 100% 0%; -webkit-transform-origin: 100% 0%; transform:scale(0.01); -moz-transform:scale(0.01); -ms-transform:scale(0.01); -o-transform:scale(0.01); -webkit-transform:scale(0.01); transition:all .5s; -moz-transition:all .5s; -ms-transition:all .5s; -o-transition:all .5s; -webkit-transition:all .5s; box-shadow: 2px 2px 4px rgba(0,0,0,.6); }
+.qrcode .barcode-layer .barcode-l{width: 322px; height: 322px; margin: 0 auto; padding: 20px; }
+.qrcode .barcode-layer .barcode-tip{text-align: center; font-size: 20px; line-height: 1.2; color: #444; margin: 10px auto; }
+.qrcode:hover .barcode-layer{opacity:1; filter:alpha(opacity=100); transform:scale(1); -webkit-transform:scale(1); -moz-transform:scale(1); -ms-transform:scale(1); -o-transform:scale(1);}

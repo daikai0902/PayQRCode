@@ -34,16 +34,20 @@
 					<td class="organizeGroup-indexOrder">1</td>
 					<td class="organizeGroup-groupName">${school.name}</td>
 					<td class="organizeGroup-indexOrder">${school.merchantId}</td>
-					<td><a target="_blank"  href="">修改</a>
-						<a target="_blank"  href="">查看缴费码</a>
+					<td><a  href="javaScript:;">修改</a>
+						<a  href="javaScript:;" class="view-qrcode">查看缴费码</a>
+						<div class="qrcode">
+							<div class="barcode-layer">
+								<div class="barcode-tip">课程二维码</div>
+								<div class="barcode-l" data-text="${school.qrcode}" data-url=""></div>
+							</div>
+						</div>
 					</td>
 				</tr>
 				`
 				</tbody>
 			</table>
-				<div class="table-footer">
-                	<div class="div-page"></div>
-            	</div>
+
 		</div>
 	</div>
 </div>
@@ -117,7 +121,29 @@
             })
         })
 
-	})
+
+
+        $(".table-page").on("hover",".view-qrcode",function(){
+            console.log($(this).next().find(".barcode-l").attr("data-text"))
+            $(this).next().find(".barcode-l").empty();
+            $(this).next().find(".barcode-l").qrcode({
+                text: $(this).next().find(".barcode-l").attr("data-text"),
+                width : 300,
+                height : 300,
+                colorDark : "#000000",
+                colorLight : "#D8D8D8",
+                src: $(".barcode-l").attr("data-url")
+            });
+        })
+
+
+
+	});
+
+
+
+
+
     window.PixelAdmin.start(init);
 </script>
 `
