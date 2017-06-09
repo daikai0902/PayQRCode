@@ -12,10 +12,10 @@ public class Application extends JapidController {
 
     /**
      * 回调接受token
-     * @param token
+     * @param authorizationCode
      */
-    public static void notifyAccessToken(String token){
-        System.err.println(token);
+    public static void notifyAccessToken(String authorizationCode){
+        System.err.println(authorizationCode);
         renderJSON(ResultVO.succeed());
     }
 }
