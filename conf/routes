@@ -6,5 +6,7 @@ GET     /favicon.ico                            404
 
 GET     /public/                                staticDir:public
 
-*      /back/{action}                           BackController.{action}
+
+*      /notify/token                           Application.notifyAccessToken
+*      /back/{action}                          BackController.{action}
 *      /{controller}/{action}                  {controller}.{action}

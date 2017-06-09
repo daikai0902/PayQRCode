@@ -1,8 +1,7 @@
 package controllers;
 
 import cn.bran.play.JapidController;
-import play.mvc.*;
-
+import models.ResultVO;
 
 
 public class Application extends JapidController {
@@ -11,4 +10,12 @@ public class Application extends JapidController {
         renderJapid();
     }
 
+    /**
+     * 回调接受token
+     * @param token
+     */
+    public static void notifyAccessToken(String token){
+        System.err.println(token);
+        renderJSON(ResultVO.succeed());
+    }
 }
