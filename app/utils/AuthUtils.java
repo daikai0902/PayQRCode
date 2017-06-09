@@ -35,7 +35,7 @@ public class AuthUtils {
         Long salt = System.currentTimeMillis();
         String secret = DigestUtils.md5Hex(salt+APP_SECRET);
         WS.HttpResponse response =  WS.url(GET_ACCESS_TOKEN).setParameter("appId",APP_ID).setParameter("appSecret",secret)
-                .setParameter("authorizationCode",token).setParameter("Salt",salt).post();
+                .setParameter("authorizationCode",token).setParameter("salt",salt).post();
         System.err.println(response.getJson().toString());
         return  new Gson().fromJson(response.getJson(),AuthResult.class);
     }
