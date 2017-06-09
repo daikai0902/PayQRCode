@@ -20,7 +20,7 @@
         connectWeikeJSBridge(function(bridge) {
             $("#btn").on("click",function(){
                   alert(1);
-                  var d={"actionType":"wk_zjjf",
+                  var d={"actionType":"startAuth",
                       "appId":"4028819A5C856C99015C8618549E25CA",
                       "state":"123456AB"};
                     bridge.send(d);
