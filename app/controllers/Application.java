@@ -18,4 +18,8 @@ public class Application extends JapidController {
         System.err.println(authorizationCode);
         renderJSON(ResultVO.succeed());
     }
+
+    public static void payPage(){
+        renderJapid();
+    }
 }

@@ -8,5 +8,6 @@ GET     /public/                                staticDir:public
 
 
 *      /notify/token                           Application.notifyAccessToken
+*      /pay                                    Application.payPage
 *      /back/{action}                          BackController.{action}
 *      /{controller}/{action}                  {controller}.{action}
