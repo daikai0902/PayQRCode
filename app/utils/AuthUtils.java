@@ -79,6 +79,7 @@ public class AuthUtils {
         int needClass = 1;
         WS.HttpResponse response = WS.url(GET_USER_INFO).setParameter("accessToken",accessToken).setParameter("appId",APP_ID)
                 .setParameter("salt",salt).setParameter("securityKey",securityKey).setParameter("needClass",needClass).post();
+       System.err.println(response.getJson().toString());
         return  new Gson().fromJson(response.getJson(),UserResult.class);
     }
 
