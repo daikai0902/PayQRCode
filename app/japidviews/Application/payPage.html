@@ -1,3 +1,9 @@
+
+
+`import models.School
+
+
+`args School school
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,12 +13,48 @@
     <meta name="format-detection" content="telephone=no,email=no">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
     <title>指尖缴费</title>
+    <style>
+        .barcode-box{text-align: center;margin-top: 70px;padding-bottom:10px;border-bottom:1px solid #cccccc }
+        .pay-icon{text-align: center;margin-top: 20px;}
+        .payicon{width: 25%;display:inline-block}
+
+        .barcode-main{border: 1px solid #cccccc}
+
+
+    </style>
 </head>
 <body>
-    <h2 style="text-align: center">指尖缴费</h2>
+    `if(school != null){
+    <h2 style="text-align: center;border-bottom: 1px solid #cccccc">指尖缴费</h2>
     <div style="text-align: center">
-        <p>欢迎使用宁波实验中学智能缴费系统</p>
+        <p>欢迎使用【${school.name}】智能缴费系统</p>
         <p>请使用支付宝或微信扫码以下二维码</p>
     </div>
+    <div class="barcode-main">
+        <div class="barcode-box">
+            <div id="barcode" data-text="${school.qrcode}"></div>
+        </div>
+        <div class="pay-icon">
+            <div class="payicon"><img src="/public/img/微信支付.png" style="width: 50px;height: 50px"><p>微信支付</p></div>
+            <div class="payicon"><img src="/public/img/支付宝.png" style="width: 50px;height: 50px"><p>支付宝</p></div>
+        </div>
+    </div>
+
+    `}else{
+        <p>后台暂无该学校的信息</p>
+    `}
 </body>
+    <script type="text/javascript" src="@{'/public/back/js/jquery.min.js'}"></script>
+    <script type="text/javascript" src="@{'/public/back/js/qrcode.js'}"></script>
+    <script>
+        if($("#barcode").length > 0) {
+            $("#barcode").qrcode({
+                text: $("#barcode").attr("data-text"),
+                width: 280,
+                height: 280,
+                colorDark: "#000000",
+                colorLight: "#D8D8D8"
+            });
+        }
+    </script>
 </html>

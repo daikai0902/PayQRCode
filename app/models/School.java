@@ -30,6 +30,10 @@ public class School extends BaseModel{
         this.save();
     }
 
+    public static School findByName(String name){
+        return School.find(getDefaultContitionSql( " name = ? "),name).first();
+    }
+
    public static  List<School> fetchAll(){
         return find("select s from School s where s.isDeleted = 0 ").fetch();
    }

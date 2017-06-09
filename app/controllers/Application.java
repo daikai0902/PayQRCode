@@ -1,10 +1,7 @@
 package controllers;
 
 import cn.bran.play.JapidController;
-import models.AuthResult;
-import models.ResultVO;
-import models.SchoolResult;
-import models.UserResult;
+import models.*;
 import org.apache.commons.lang.StringUtils;
 import play.Logger;
 import utils.AuthUtils;
@@ -23,7 +20,6 @@ public class Application extends JapidController {
      * @param authorizationCode
      */
     public static void notifyAccessToken(String authorizationCode){
-        System.err.println(authorizationCode);
         if(StringUtils.isBlank(authorizationCode)){
             renderJSON(ResultVO.failed("没有获取到accessToken"));
         }
@@ -41,10 +37,11 @@ public class Application extends JapidController {
             }
         }
         Logger.info("学校名称是:"+schoolName);
-        renderJSON(ResultVO.succeed(schoolName));
+        payPage(schoolName);
     }
 
-    public static void payPage(){
-        renderJapid();
+    public static void payPage(String schoolName){
+        School school = School.findByName(schoolName);
+        renderJapid(school);
     }
 }
