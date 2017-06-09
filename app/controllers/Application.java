@@ -1,6 +1,7 @@
 package controllers;
 
 import cn.bran.play.JapidController;
+import models.AuthResult;
 import models.ResultVO;
 import models.SchoolResult;
 import models.UserResult;
@@ -25,8 +26,9 @@ public class Application extends JapidController {
         if(StringUtils.isBlank(authorizationCode)){
             renderJSON(ResultVO.failed("没有获取到accessToken"));
         }
+        AuthResult authResult = AuthUtils.getAccessToken(authorizationCode);
         String schoolName = "";
-        UserResult userResult = AuthUtils.getUserInfo(authorizationCode);
+        UserResult userResult = AuthUtils.getUserInfo(authResult.accessToken);
         if(userResult != null ){
             List<UserResult.Clazzinfo> clazzs = userResult.classList;
             if (clazzs != null && clazzs.size() > 0) {
