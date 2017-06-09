@@ -63,6 +63,7 @@ public class AuthUtils {
         WS.HttpResponse response =  WS.url(GET_SCHOOL_INFO).setParameter("accessToken",accessToken)
                 .setParameter("appId",APP_ID).setParameter("salt",salt).setParameter("securityKey",securityKey)
                 .setParameter("schoolId",schoolId).post();
+        System.err.println(response.getJson().toString());
         return new Gson().fromJson(response.getJson(),SchoolResult.class);
 
     }

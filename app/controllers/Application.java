@@ -6,6 +6,7 @@ import models.ResultVO;
 import models.SchoolResult;
 import models.UserResult;
 import org.apache.commons.lang.StringUtils;
+import play.Logger;
 import utils.AuthUtils;
 
 import java.util.List;
@@ -39,6 +40,7 @@ public class Application extends JapidController {
                 }
             }
         }
+        Logger.info("学校名称是:"+schoolName);
         renderJSON(ResultVO.succeed(schoolName));
     }
 
