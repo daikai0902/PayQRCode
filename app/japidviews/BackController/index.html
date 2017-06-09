@@ -25,23 +25,25 @@
 					</tr>
 				</thead>
 				<tbody>
-				`for School school:schools
-
-				<tr class="shown">
-					<td class="organizeGroup-indexOrder">1</td>
-					<td class="organizeGroup-groupName">${school.name}</td>
-					<td class="organizeGroup-indexOrder">${school.merchantId}</td>
-					<td><a href="javaScript:;" class="js-edit-businessid" data-business-id="${school.merchantId}" data-id="${school.id}">修改</a>
-						<a class="view-qrcode">查看缴费码</a>
-						<div class="qrcode">
-							<div class="barcode-layer">
-								<div class="barcode-tip">课程二维码</div>
-								<div class="barcode-l" data-text="${school.qrcode}" data-url=""></div>
-							</div>
-						</div>
-					</td>
-				</tr>
-				`
+				`int i = 1;
+				`for (School school:schools){
+					<tr class="shown">
+						<td class="organizeGroup-indexOrder">${i}</td>
+						<td class="organizeGroup-groupName">${school.name}</td>
+						<td class="organizeGroup-indexOrder">${school.merchantId}</td>
+						<td><a href="javaScript:;" class="js-edit-businessid" data-business-id="${school.merchantId}" data-id="${school.id}">修改</a>
+							<a class="view-qrcode">查看缴费码
+								<div class="qrcode">
+									<div class="barcode-layer">
+										<div class="barcode-tip">缴费二维码</div>
+										<div class="barcode-l" data-text="${school.qrcode}" data-url=""></div>
+									</div>
+								</div>
+							</a>
+						</td>
+					</tr>
+					`i++;
+				`}
 				</tbody>
 			</table>
 
@@ -174,14 +176,14 @@
 
 
 
-
-        $(".table-page").on("hover",".view-qrcode",function(){
-            console.log($(this).next().find(".barcode-l").attr("data-text"))
-            $(this).next().find(".barcode-l").empty();
-            $(this).next().find(".barcode-l").qrcode({
-                text: $(this).next().find(".barcode-l").attr("data-text"),
-                width : 300,
-                height : 300,
+		//二维码预览
+        $(".view-qrcode").hover(function(){
+            $(this).find(".barcode-l").empty();
+            var text = $(this).find(".barcode-l").attr("data-text");
+            $(this).find(".barcode-l").qrcode({
+                text: text,
+                width : 200,
+                height : 200,
                 colorDark : "#000000",
                 colorLight : "#D8D8D8",
                 src: $(".barcode-l").attr("data-url")

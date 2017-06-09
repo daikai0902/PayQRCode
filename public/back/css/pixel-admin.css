@@ -242,7 +242,7 @@ body:after,
 #main-menu:after,
 #content-wrapper:after,
 #main-wrapper:after{clear: both;}
-#main-wrapper{width: 100%; overflow: hidden !important;}
+#main-wrapper{width: 100%;}
 #content-wrapper{left: 0; padding: 64px 18px 18px 18px; width: 100%; position: relative;}
 #main-menu-bg{display: block; left: 0; height: 100%; padding: 0; position: fixed; top: 0; width: 100%; z-index: 499;}
 @media (max-width: 480px){.animate-mm-sm #main-navbar .navbar-inner, .animate-mm-sm #main-menu-toggle, .animate-mm-sm #main-wrapper, .animate-mm-sm #main-menu, .animate-mm-sm #content-wrapper, .animate-mm-sm #main-menu-bg{-webkit-transition: all 0.5s; transition: all 0.5s;} .animate-mm-sm #main-navbar .navbar-header{-webkit-transition: padding 0.5s; transition: padding 0.5s;}}
