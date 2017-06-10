@@ -42,6 +42,6 @@ public class Application extends JapidController {
 
     public static void payPage(String schoolName){
         School school = School.findByName(schoolName);
-        renderJapid(school);
+        renderJapid(school,schoolName);
     }
 }

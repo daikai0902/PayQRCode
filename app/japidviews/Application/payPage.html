@@ -3,7 +3,7 @@
 `import models.School
 
 
-`args School school
+`args School school,String schoolName
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,15 +17,14 @@
         .barcode-box{text-align: center;margin-top: 70px;padding-bottom:10px;border-bottom:1px solid #cccccc }
         .pay-icon{text-align: center;margin-top: 20px;}
         .payicon{width: 25%;display:inline-block}
-
         .barcode-main{border: 1px solid #cccccc}
-
+        .no-school{text-align: center;margin-top: 20px}
+        .no-school-img{text-align: center;margin-top: 80px}
 
     </style>
 </head>
 <body>
     `if(school != null){
-    <h2 style="text-align: center;border-bottom: 1px solid #cccccc">指尖缴费</h2>
     <div style="text-align: center">
         <p>欢迎使用【${school.name}】智能缴费系统</p>
         <p>请使用支付宝或微信扫码以下二维码</p>
@@ -41,7 +40,13 @@
     </div>
 
     `}else{
-        <p>后台暂无该学校的信息</p>
+        <div class="no-school">
+            <p style="padding-top: 50px">对不起，【${schoolName}】暂未开启</p>
+            <p>"指尖缴费"服务，请联系学校确认缴费事项</p>
+        </div>
+        <div class="no-school-img">
+            <img src="/public/img/不可用.jpg" style="width: 300px;height: 300px;">
+        </div>
     `}
 </body>
     <script type="text/javascript" src="@{'/public/back/js/jquery.min.js'}"></script>
