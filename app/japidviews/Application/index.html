@@ -1,6 +1,23 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no,email=no">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <title>指尖缴费</title>
+    <style>
+        .login-main{position: absolute;top:50%;left: 40%}
+        .login-btn{font-size: 20px}
+
+    </style>
+</head>
 <body>
-    <input type="button" value="以微课账号登录" id="btn"/>
+
+    <div class="login-main">
+        <input class="login-btn" type="button" value="授权登录" id="btn"/>
+    </div>
 </body>
     <script type="text/javascript" src="@{'/public/back/js/jquery.min.js'}"></script>
     <script type="text/javascript">
@@ -19,7 +36,6 @@
         }
         connectWeikeJSBridge(function(bridge) {
             $("#btn").on("click",function(){
-                  alert(1);
                   var d={"actionType":"startAuth",
                       "appId":"4028819A5C856C99015C8618549E25CA",
                       "state":"123456AB"};
