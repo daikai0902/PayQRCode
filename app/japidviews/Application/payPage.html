@@ -14,28 +14,32 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
     <title>指尖缴费</title>
     <style>
+        .qrcode-main{height: 100%}
         .barcode-box{text-align: center;}
-        .pay-icon{text-align: center;margin-top: 10px;}
+        .pay-icon{text-align: center;padding-top: 5%}
         .payicon{width: 25%;display:inline-block}
-        .barcode-main{border: 1px solid #cccccc;margin-top: 10px;}
-        .no-school{text-align: center;margin-top: 10px}
-        .no-school-img{text-align: center;margin-top: 80px}
+        .barcode-main{border: 1px solid #cccccc;height: 70%}
+        .no-school{text-align: center;}
+        .no-school-img{text-align: center;}
 
-        .end-tips{text-align: center}
-        .title-tips{margin-bottom: 10px}
+        .end-tips{text-align: center;height: 15%}
+        .end-tips p{margin:3% 0}
+        .title-tips{height: 10%;margin-bottom: 3%}
         .title-tips img{vertical-align: middle;display: inline-block;width: 30px;height: 30px}
         .title-tips span{display: inline-block}
+        .barcode-p{text-align: center;font-size: 20px;margin:3% 0}
     </style>
 </head>
 <body>
     `if(school != null && school.isUse){
+    <div class="qrcode-main">
         <div class="title-tips">
             <img src="/public/img/qrcode.png">
             <span>缴费二维码</span>
         </div>
 
         <div class="barcode-main">
-            <p style="text-align: center;font-size: 20px;margin-top: 10px">${school.name}</p>
+            <p class="barcode-p">${school.name}</p>
             <div class="barcode-box">
                 <div id="barcode" data-text="${school.qrcode}"></div>
             </div>
@@ -48,7 +52,7 @@
             <p>使用支付宝或微信扫描二维码</p>
             <p>安全验证后才能支付，请放心扫码！</p>
         </div>
-
+    </div>
     `}else{
         <div class="no-school">
             <p style="padding-top: 50px">对不起，【${schoolName}】暂未开启</p>
