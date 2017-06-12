@@ -20,8 +20,8 @@
 					<tr>
 						<th style="width:10%">序号</th>
 						<th style="width:10%">学校名称</th>
-						<th style="width:20%">商户ID</th>
-						<th style="width:10%">操作</th>
+						<th style="width:10%">商户ID</th>
+						<th style="width:20%">操作</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -32,6 +32,7 @@
 						<td class="organizeGroup-groupName">${school.name}</td>
 						<td class="organizeGroup-indexOrder">${school.merchantId}</td>
 						<td><a href="javaScript:;" class="js-edit-businessid" data-business-id="${school.merchantId}" data-id="${school.id}">修改</a>
+							<a><input type="checkbox" ${school.isUse?"checked":""} class="js-use-school" data-id="${school.id}">是否启用</a>
 							<a class="view-qrcode">查看缴费码
 								<div class="qrcode">
 									<div class="barcode-layer">
@@ -40,6 +41,7 @@
 									</div>
 								</div>
 							</a>
+
 						</td>
 					</tr>
 					`i++;
@@ -122,6 +124,21 @@
             $(".js-edit-group").attr("data-id",schoolid);
             $("#modal-edit-group").modal("show");
         });
+
+        $(".js-use-school").on("click",function () {
+			var isUse = $(this).prop("checked"),
+                schoolid = $(this).attr("data-id");
+            $.post('/back/setSchoolUse',{
+                schoolId:schoolid,
+                status:isUse
+            },function(res){
+                if(res.status = "true"){
+                    window.location.reload();
+                }else{
+                    $.growl.error({ message:  res.msg });
+                }
+            })
+        })
 
         $(".js-edit-group").on("click",function(){
             var oldbusinessID = $("#oldbusinessID").val().trim(),

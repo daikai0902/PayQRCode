@@ -8,15 +8,16 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
     <title>指尖缴费</title>
     <style>
-        .login-main{position: absolute;top:50%;left: 40%}
-        .login-btn{font-size: 20px}
+        html,body{height: 100%;margin: 0;}
+        .login-main{height: 100%;width:100%;background: url(/public/img/index.jpg) no-repeat center center;background-size: cover;position: relative;}
+        .login-btn{font-size: 18px;color: #fff; position: absolute;left: 50%;margin-left: -100px;border:none;background-color: #1aac19;border-radius: 10px;bottom: 30px;width: 200px;height: 55px;display: block;}
 
     </style>
 </head>
 <body>
 
     <div class="login-main">
-        <input class="login-btn" type="button" value="授权登录" id="btn"/>
+        <input class="login-btn" type="button" value="获取学校二维码" id="btn"/>
     </div>
 </body>
     <script type="text/javascript" src="@{'/public/back/js/jquery.min.js'}"></script>

@@ -34,4 +34,10 @@ public class BackController extends JapidController {
         renderJSON(ResultVO.succeed());
     }
 
+    public static void setSchoolUse(long schoolId,boolean status){
+        School school = School.findById(schoolId);
+        school.setIsUse(status);
+        renderJSON(ResultVO.succeed());
+    }
+
 }

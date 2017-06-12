@@ -16,6 +16,8 @@ public class School extends BaseModel{
 
     public String qrcode;
 
+    public Boolean isUse = true;
+
     public static School add(String name,String merchantId,String qrcode){
         School school = new School();
         school.name = name;
@@ -27,6 +29,11 @@ public class School extends BaseModel{
     public void editSchool(String merchantId,String qrcode){
         this.merchantId = merchantId;
         this.qrcode = qrcode;
+        this.save();
+    }
+
+    public void setIsUse(boolean status){
+        this.isUse =status;
         this.save();
     }
 

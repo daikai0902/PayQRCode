@@ -14,30 +14,40 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
     <title>指尖缴费</title>
     <style>
-        .barcode-box{text-align: center;margin-top: 50px;padding-bottom:50px;border-bottom:1px solid #cccccc }
+        .barcode-box{text-align: center;margin-top: 25px;padding-bottom:25px;}
         .pay-icon{text-align: center;margin-top: 20px;}
         .payicon{width: 25%;display:inline-block}
-        .barcode-main{border: 1px solid #cccccc}
+        .barcode-main{border: 1px solid #cccccc;margin-top: 30px;}
         .no-school{text-align: center;margin-top: 20px}
         .no-school-img{text-align: center;margin-top: 80px}
 
+        .end-tips{text-align: center}
+        .title-tips{margin-bottom: 10px}
+        .title-tips img{vertical-align: middle;display: inline-block;width: 30px;height: 30px}
+        .title-tips span{display: inline-block}
     </style>
 </head>
 <body>
-    `if(school != null){
-    <div style="text-align: center">
-        <p>欢迎使用【${school.name}】智能缴费系统</p>
-        <p>请使用支付宝或微信扫码以下二维码</p>
-    </div>
-    <div class="barcode-main">
-        <div class="barcode-box">
-            <div id="barcode" data-text="${school.qrcode}"></div>
+    `if(school != null && school.isUse){
+        <div class="title-tips">
+            <img src="/public/img/qrcode.png">
+            <span>缴费二维码</span>
         </div>
-        <div class="pay-icon">
-            <div class="payicon"><img src="/public/img/微信支付.png" style="width: 50px;height: 50px"><p>微信支付</p></div>
-            <div class="payicon"><img src="/public/img/支付宝.png" style="width: 50px;height: 50px"><p>支付宝</p></div>
+
+        <div class="barcode-main">
+            <p style="text-align: center;font-size: 20px;margin-top: 20px">${school.name}</p>
+            <div class="barcode-box">
+                <div id="barcode" data-text="${school.qrcode}"></div>
+            </div>
+            <div class="pay-icon">
+                <div class="payicon"><img src="/public/img/支付宝.png" style="width: 50px;height: 50px"><p>支付宝</p></div>
+                <div class="payicon"><img src="/public/img/微信支付.png" style="width: 50px;height: 50px"><p>微信支付</p></div>
+            </div>
         </div>
-    </div>
+        <div class="end-tips">
+            <p>使用支付宝或微信扫描二维码</p>
+            <p>安全验证后才能支付，请放心扫码！</p>
+        </div>
 
     `}else{
         <div class="no-school">
