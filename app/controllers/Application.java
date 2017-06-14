@@ -4,6 +4,7 @@ import cn.bran.play.JapidController;
 import models.*;
 import org.apache.commons.lang.StringUtils;
 import play.Logger;
+import play.cache.Cache;
 import utils.AuthUtils;
 
 import java.util.List;
@@ -24,6 +25,12 @@ public class Application extends JapidController {
             renderJSON(ResultVO.failed("没有获取到accessToken"));
         }
         AuthResult authResult = AuthUtils.getAccessToken(authorizationCode);
+        if(authResult == null){
+            Logger.info("需要刷新accesstoken");
+            authResult = AuthUtils.refreshToken((String) Cache.get("refreshkey"));
+        }else{
+            Cache.safeSet("refreshkey",authResult.refreshToken,"1d");
+        }
         Logger.info("获取accessToken:"+authResult.accessToken+",,超时时间是:"+authResult.expiresIn);
         String schoolName = "";
         UserResult userResult = AuthUtils.getUserInfo(authResult.accessToken);
