@@ -24,6 +24,7 @@ public class Application extends JapidController {
             renderJSON(ResultVO.failed("没有获取到accessToken"));
         }
         AuthResult authResult = AuthUtils.getAccessToken(authorizationCode);
+        Logger.info("获取accessToken:"+authResult.accessToken+",,超时时间是:"+authResult.expiresIn);
         String schoolName = "";
         UserResult userResult = AuthUtils.getUserInfo(authResult.accessToken);
         if(userResult != null ){
@@ -35,6 +36,8 @@ public class Application extends JapidController {
                     schoolName = schoolResult.schoolInfo.schoolName;
                 }
             }
+        }else{
+            Logger.info("用户信息返回为空！");
         }
         Logger.info("学校名称是:"+schoolName);
         payPage(schoolName);
