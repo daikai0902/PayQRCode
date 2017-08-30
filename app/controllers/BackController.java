@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class BackController extends JapidController {
 
-    public static final String URL_TEMPLATE = "http://static.daily.heyean.com/caibao/school.html?#/Home/";
+    public static final String URL_TEMPLATE = "http://openapi.caibaopay.com/h5/school/index.htm?schoolId=";
 
     public static void index(){
         List<School> schools = School.fetchAll();
