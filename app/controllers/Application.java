@@ -46,8 +46,12 @@ public class Application extends JapidController {
         }else{
             Logger.info("用户信息返回为空！");
         }
-        Logger.info("学校名称是:"+schoolName);
-        payPage(schoolName);
+        StringBuffer sb = new StringBuffer();
+        sb.append("https://yxt.ngb.abchina.com/login_m2.aspx?");
+        sb.append("id=").append(userResult.userInfo.sequence);
+        sb.append("&name=").append(userResult.userInfo.realName);
+        sb.append("&school=").append(schoolName);
+        redirect(sb.toString(),true);
     }
 
     public static void payPage(String schoolName){
