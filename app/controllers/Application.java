@@ -7,6 +7,7 @@ import play.Logger;
 import play.cache.Cache;
 import utils.AuthUtils;
 
+import java.net.URLEncoder;
 import java.util.List;
 
 
@@ -20,7 +21,7 @@ public class Application extends JapidController {
      * 回调接受token
      * @param authorizationCode
      */
-    public static void notifyAccessToken(String authorizationCode){
+    public static void notifyAccessToken(String authorizationCode) throws Exception{
         if(StringUtils.isBlank(authorizationCode)){
             renderJSON(ResultVO.failed("没有获取到accessToken"));
         }
@@ -49,9 +50,10 @@ public class Application extends JapidController {
         StringBuffer sb = new StringBuffer();
         sb.append("https://yxt.ngb.abchina.com/login_m2.aspx?");
         sb.append("id=").append(userResult.userInfo.sequence);
-        sb.append("&name=").append(userResult.userInfo.realName);
-        sb.append("&school=").append(schoolName);
+        sb.append("&name=").append(URLEncoder.encode(userResult.userInfo.realName,"utf-8"));
+        sb.append("&school=").append(URLEncoder.encode(schoolName,"utf-8"));
         Logger.info("最终地址："+sb.toString());
+
         redirect(sb.toString(),true);
     }
 
