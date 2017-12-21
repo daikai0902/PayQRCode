@@ -51,6 +51,7 @@ public class Application extends JapidController {
         sb.append("id=").append(userResult.userInfo.sequence);
         sb.append("&name=").append(userResult.userInfo.realName);
         sb.append("&school=").append(schoolName);
+        Logger.info("最终地址："+sb.toString());
         redirect(sb.toString(),true);
     }
 
