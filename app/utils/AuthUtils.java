@@ -18,9 +18,9 @@ public class AuthUtils {
 
     private static final  String REFRESH_ACCESS_TOKEN = "http://oauth.weike.wanpeng.com/api/refresh_token.json";
 
-    private static final  String APP_ID = "4028819A5C856C99015C8618549E25CA";
+    private static final  String APP_ID = "402881996076A692016077E03CC82C16";
 
-    private static final  String APP_SECRET = "wk_zjjf";
+    private static final  String APP_SECRET = "wk_yxtjf";
 
     private static final String GET_USER_INFO = "http://openapi.weike.wanpeng.com/user/userInfo.json";
 
