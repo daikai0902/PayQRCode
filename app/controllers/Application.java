@@ -1,6 +1,7 @@
 package controllers;
 
 import cn.bran.play.JapidController;
+import com.google.gson.JsonObject;
 import models.*;
 import org.apache.commons.lang.StringUtils;
 import play.Logger;
@@ -13,7 +14,27 @@ import java.util.List;
 
 public class Application extends JapidController {
 
-    public static void index() {
+    public static void index(String token) throws Exception {
+        UserResult userResult = AuthUtils.getUserInfoNoAuth(token);
+        if(userResult != null){
+            String schoolName = "";
+            if(userResult.userInfo != null){//学生
+                List<UserResult.Clazzinfo> clazzs = userResult.classList;
+                if (clazzs != null && clazzs.size() > 0) {
+                    String schoolId = clazzs.get(0).schoolId;
+                    SchoolResult schoolResult = AuthUtils.getSchoolInfoNoAuth(token,schoolId);
+                    if (schoolResult != null){
+                        schoolName = schoolResult.schoolInfo.schoolName;
+                    }
+                }
+                StringBuffer sb = new StringBuffer();
+                sb.append("https://yxt.ngb.abchina.com/login_m2.aspx?");
+                sb.append("id=").append(userResult.userInfo.sequence);
+                sb.append("&name=").append(URLEncoder.encode(userResult.userInfo.realName,"utf-8"));
+                sb.append("&school=").append(URLEncoder.encode(schoolName,"utf-8"));
+                redirect(sb.toString(),true);
+            }
+        }
         renderJapid();
     }
 
@@ -36,25 +57,33 @@ public class Application extends JapidController {
         String schoolName = "";
         UserResult userResult = AuthUtils.getUserInfo(authResult.accessToken);
         if(userResult != null ){
-            List<UserResult.Clazzinfo> clazzs = userResult.classList;
-            if (clazzs != null && clazzs.size() > 0) {
-                String schoolId = clazzs.get(0).schoolId;
-                SchoolResult schoolResult = AuthUtils.getSchoolInfo(authResult.accessToken,schoolId);
-                if (schoolResult != null){
-                    schoolName = schoolResult.schoolInfo.schoolName;
+            if(userResult.userInfo != null && userResult.userInfo.ownerType == 1){//学生
+                List<UserResult.Clazzinfo> clazzs = userResult.classList;
+                if (clazzs != null && clazzs.size() > 0) {
+                    String schoolId = clazzs.get(0).schoolId;
+                    SchoolResult schoolResult = AuthUtils.getSchoolInfo(authResult.accessToken,schoolId);
+                    if (schoolResult != null){
+                        schoolName = schoolResult.schoolInfo.schoolName;
+                    }
                 }
+                StringBuffer sb = new StringBuffer();
+                sb.append("https://yxt.ngb.abchina.com/login_m2.aspx?");
+                sb.append("id=").append(userResult.userInfo.sequence);
+                sb.append("&name=").append(URLEncoder.encode(userResult.userInfo.realName,"utf-8"));
+                sb.append("&school=").append(URLEncoder.encode(schoolName,"utf-8"));
+                redirect(sb.toString(),true);
             }
+
+            if(userResult.userInfo != null && userResult.userInfo.ownerType == 3) {//家长
+            }
+
+            Logger.info("用户角色不对:"+userResult.userInfo.ownerType);
+            renderJSON(ResultVO.failed("用户角色不对"));
         }else{
             Logger.info("用户信息返回为空！");
+            renderJSON(ResultVO.failed("没有获取到用户信息"));
         }
-        StringBuffer sb = new StringBuffer();
-        sb.append("https://yxt.ngb.abchina.com/login_m2.aspx?");
-        sb.append("id=").append(userResult.userInfo.sequence);
-        sb.append("&name=").append(URLEncoder.encode(userResult.userInfo.realName,"utf-8"));
-        sb.append("&school=").append(URLEncoder.encode(schoolName,"utf-8"));
-        Logger.info("最终地址："+sb.toString());
 
-        redirect(sb.toString(),true);
     }
 
     public static void payPage(String schoolName){

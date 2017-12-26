@@ -86,6 +86,39 @@ public class AuthUtils {
     }
 
 
+    /**
+     * 非授权登录获取用户信息
+     * @param token
+     * @return
+     */
+    public static UserResult getUserInfoNoAuth(String token){
+        Long salt = System.currentTimeMillis();
+        String securityKey = DigestUtils.md5Hex(token+salt+APP_SECRET);
+        int needClass = 1;
+        WS.HttpResponse response = WS.url(GET_USER_INFO).setParameter("token",token).setParameter("appId",APP_ID)
+                .setParameter("salt",salt).setParameter("securityKey",securityKey).setParameter("needClass",needClass).post();
+        System.err.println(response.getJson().toString());
+        return  new Gson().fromJson(response.getJson(),UserResult.class);
+    }
+
+
+    /**
+     * 非授权登录获取学校信息
+     * @param token
+     * @param schoolId
+     * @return
+     */
+    public static SchoolResult getSchoolInfoNoAuth(String token,String schoolId){
+        Long salt = System.currentTimeMillis();
+        String securityKey = DigestUtils.md5Hex(token+salt+APP_SECRET);
+        WS.HttpResponse response =  WS.url(GET_SCHOOL_INFO).setParameter("token",token)
+                .setParameter("appId",APP_ID).setParameter("salt",salt).setParameter("securityKey",securityKey)
+                .setParameter("schoolId",schoolId).post();
+        System.err.println(response.getJson().toString());
+        return new Gson().fromJson(response.getJson(),SchoolResult.class);
+
+    }
+
 
 
 }
