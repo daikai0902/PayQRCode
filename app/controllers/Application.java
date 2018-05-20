@@ -6,6 +6,7 @@ import models.*;
 import org.apache.commons.lang.StringUtils;
 import play.Logger;
 import play.cache.Cache;
+import play.mvc.Http;
 import utils.AuthUtils;
 
 import java.net.URLEncoder;
@@ -71,6 +72,7 @@ public class Application extends JapidController {
                 sb.append("id=").append(userResult.userInfo.sequence);
                 sb.append("&name=").append(URLEncoder.encode(userResult.userInfo.realName,"utf-8"));
                 sb.append("&school=").append(URLEncoder.encode(schoolName,"utf-8"));
+                sb.append("&ip=").append(Http.Request.current().remoteAddress);
                 redirect(sb.toString(),true);
             }
 
