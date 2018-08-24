@@ -1,3 +1,4 @@
+`args  String userSequence,String userName,String school
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,33 +21,47 @@
 </head>
 <body>
 
-    <div class="login-main">
-        <input class="login-btn" type="button" value="授权登录" id="btn"/>
-    </div>
+<div class="login-main">
+    <input class="login-btn" type="button" value="知道了，去缴费" id="btn"/>
+</div>
 </body>
-    <script type="text/javascript" src="@{'/public/back/js/jquery.min.js'}"></script>
-    <script type="text/javascript">
+<script type="text/javascript" src="@{'/public/back/js/jquery.min.js'}"></script>
+<script type="text/javascript">
     function connectWeikeJSBridge(callback) {
-            if (window.WeikeJSBridge) {
-                callback(WeikeJSBridge);
-            } else {
-                try {
-                        document.addEventListener('WeikeJSBridgeReady', function(){
-                        callback(WeikeJSBridge);
-                    });
-                } catch (e){
+        if (window.WeikeJSBridge) {
+            callback(WeikeJSBridge);
+        } else {
+            try {
+                document.addEventListener('WeikeJSBridgeReady', function(){
+                    callback(WeikeJSBridge);
+                });
+            } catch (e){
 
-                }
             }
         }
-        connectWeikeJSBridge(function(bridge) {
-            $("#btn").on("click",function(){
-                  var d={"actionType":"startAuth",
-                      "appId":"402881996076A692016077E03CC82C16",
-                      "state":"123456AB"};
-                    bridge.send(d);
-             });
+    }
+    connectWeikeJSBridge(function(bridge) {
+        $("#btn").on("click",function(){
+            // var d={"actionType":"startAuth",
+            //     "appId":"402881996076A692016077E03CC82C16",
+            //     "state":"123456AB"};
+            //   bridge.send(d);
+
+            var userSequence = "${userSequence}",userName="${userName}",school="${school}";
+
+            var d={actionType:"loadUrl",
+
+                url:"https://yxt.ngb.abchina.com/login_m2.aspx?name="+userName+
+                "&id="+userSequence+"&school="+school,
+
+                openType:1,//外部浏览器打开
+
+                headparams:[{"name":"appversion","value":"8.0"},{"name":"version","value":"1.0"},{"name":"action","value":"hahaha"}]};
+
+            bridge.send(d);//发送消息到微课
+
         });
-    </script>
+    });
+</script>
 
 </html>

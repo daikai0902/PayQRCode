@@ -16,8 +16,8 @@ import java.util.List;
 public class Application extends JapidController {
 
     public static void index(String token) throws Exception {
-
         UserResult userResult = AuthUtils.getUserInfoNoAuth(token);
+        String userSequence = "",userName = "",school="";
         if(userResult != null){
             String schoolName = "";
             if(userResult.userInfo != null){//学生
@@ -29,15 +29,19 @@ public class Application extends JapidController {
                         schoolName = schoolResult.schoolInfo.schoolName;
                     }
                 }
-                StringBuffer sb = new StringBuffer();
-                sb.append("https://yxt.ngb.abchina.com/login_m2.aspx?");
-                sb.append("id=").append(userResult.userInfo.sequence);
-                sb.append("&name=").append(URLEncoder.encode(userResult.userInfo.realName,"utf-8"));
-                sb.append("&school=").append(URLEncoder.encode(schoolName,"utf-8"));
-                redirect(sb.toString(),true);
+//                StringBuffer sb = new StringBuffer();
+//                sb.append("https://yxt.ngb.abchina.com/login_m2.aspx?");
+//                sb.append("id=").append(userResult.userInfo.sequence);
+//                sb.append("&name=").append(URLEncoder.encode(userResult.userInfo.realName,"utf-8"));
+//                sb.append("&school=").append(URLEncoder.encode(schoolName,"utf-8"));
+//                redirect(sb.toString(),true);
+                userSequence = userResult.userInfo.sequence+"";
+                userName  = URLEncoder.encode(userResult.userInfo.realName,"utf-8");
+                school = URLEncoder.encode(schoolName,"utf-8");
+                renderJapid(userSequence,userName,school);
             }
         }
-        renderJapid();
+        renderJapid(userSequence,userName,school);
     }
 
     /**
