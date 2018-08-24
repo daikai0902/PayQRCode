@@ -36,8 +36,8 @@ public class Application extends JapidController {
 //                sb.append("&school=").append(URLEncoder.encode(schoolName,"utf-8"));
 //                redirect(sb.toString(),true);
                 userSequence = userResult.userInfo.sequence+"";
-                userName  = URLEncoder.encode(userResult.userInfo.realName,"utf-8");
-                school = URLEncoder.encode(schoolName,"utf-8");
+                userName  = userResult.userInfo.realName;
+                school = schoolName;
                 renderJapid(userSequence,userName,school);
             }
         }
