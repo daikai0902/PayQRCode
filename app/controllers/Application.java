@@ -16,6 +16,7 @@ import java.util.List;
 public class Application extends JapidController {
 
     public static void index(String token) throws Exception {
+
         UserResult userResult = AuthUtils.getUserInfoNoAuth(token);
         if(userResult != null){
             String schoolName = "";
