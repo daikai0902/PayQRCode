@@ -10,18 +10,23 @@
     <title>银校通缴费</title>
     <style>
         html,body{height: 100%;margin: 0;}
-        .login-main{margin-top:15px;height: 100%;width:100%;background: url(/public/img/index.jpg) no-repeat center center;background-size: cover;position: relative;}
+        .login-main{padding-top: 60px;height: 100%;width:100%;background-size: cover;position: relative;box-sizing: border-box;}
         .login-btn{font-size: 18px;color: #fff; position: absolute;left: 50%;margin-left: -100px;border:none;background-color: #1aac19;border-radius: 10px;bottom: 30px;width: 200px;height: 55px;display: block;}
         input[type="button"], input[type="submit"], input[type="reset"] {
 
             -webkit-appearance: none;
 
         }
+        .login-main p{ margin: 0 auto; line-height: 32px; text-align: center; }
     </style>
 </head>
 <body>
 
 <div class="login-main">
+     <p>欢迎使用银校通缴费服务</p>
+     <p>当前登录学生的优肯号为:${userSequence}</p>
+     <p>当前登录学生的姓名为:${userName}</p>
+     <p>当前登录学生的学校为:${school}</p>
     <input class="login-btn" type="button" value="知道了，去缴费" id="btn"/>
 </div>
 </body>
