@@ -5,6 +5,7 @@ import models.AuthResult;
 import models.SchoolResult;
 import models.UserResult;
 import org.apache.commons.codec.digest.DigestUtils;
+import play.Logger;
 import play.libs.WS;
 
 /**
@@ -64,7 +65,8 @@ public class AuthUtils {
         WS.HttpResponse response =  WS.url(GET_SCHOOL_INFO).setParameter("accessToken",accessToken)
                 .setParameter("appId",APP_ID).setParameter("salt",salt).setParameter("securityKey",securityKey)
                 .setParameter("schoolId",schoolId).post();
-        System.err.println(response.getJson().toString());
+        Logger.info("获取学校信息接口具体参数，salt："+salt+"，securityKey："+securityKey);
+       Logger.info("获取学校信息接口返回："+response.getJson().toString());
         return new Gson().fromJson(response.getJson(),SchoolResult.class);
 
     }
@@ -81,7 +83,8 @@ public class AuthUtils {
         int needClass = 1;
         WS.HttpResponse response = WS.url(GET_USER_INFO).setParameter("accessToken",accessToken).setParameter("appId",APP_ID)
                 .setParameter("salt",salt).setParameter("securityKey",securityKey).setParameter("needClass",needClass).post();
-       System.err.println(response.getJson().toString());
+        Logger.info("获取用户信息接口具体参数，salt："+salt+"，securityKey："+securityKey);
+        Logger.info("获取用户信息接口返回："+response.getJson().toString());
         return  new Gson().fromJson(response.getJson(),UserResult.class);
     }
 

@@ -38,6 +38,7 @@ public class Application extends JapidController {
             List<UserResult.Clazzinfo> clazzs = userResult.classList;
             if (clazzs != null && clazzs.size() > 0) {
                 String schoolId = clazzs.get(0).schoolId;
+                Logger.info("学校ID:"+schoolId);
                 SchoolResult schoolResult = AuthUtils.getSchoolInfo(authResult.accessToken,schoolId);
                 if (schoolResult != null){
                     schoolName = schoolResult.schoolInfo.schoolName;
